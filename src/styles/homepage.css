@@ -1,0 +1,11 @@
+.tick {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 6rem;
+  }
+  .warning {
+    color: white;
+    margin: 2rem auto;
+    text-align: center;
+    font-size: 2rem;
+  }

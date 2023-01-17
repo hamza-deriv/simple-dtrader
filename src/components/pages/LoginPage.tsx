@@ -1,12 +1,17 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { observer } from "mobx-react";
-import {extendObservable} from 'mobx';
 import "../styles/login.css";
 import { useState } from "react";
 
 interface RouterProps {
     history: string;
   }
+
+type LoginToken = {
+    token: string,
+    is_logged_in: boolean
+
+}
   
 //   type Props = RouteComponentProps<RouterProps>;
   
@@ -21,10 +26,14 @@ interface RouterProps {
 
 const LoginPage = () => {
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    // const [is_disabled, setIsDisabled] = useState<boolean>(false)
+    // const [loading, setLoading] = useState<boolean>(false)
+    // const [message, setMessage] = useState<string>('')
 
-      const handleSubmit = (e) =>{
+
+      const handleSubmit = () =>{
         fetch('https://reqres.in/api/login', {
             method: 'POST',
             headers: {
@@ -35,10 +44,17 @@ const LoginPage = () => {
                 password: password
             })
             })
-            .then(response => response.json())
-            .then(data => console.log(data))
-        console.log(email, password)
-        e.preventDefault();
+            .then(response => {
+                // setLoading(true)
+                response.json()
+            }
+            )
+            .then(data => {
+                // setLoading(false)
+                // setMessage(data)
+                console.log(data)
+            })
+        // e.preventDefault();
       }
 
     return (
@@ -66,12 +82,16 @@ const LoginPage = () => {
                 className="form-control"
                 />
 
-                <button type="submit">Login</button>
+                <button 
+                type="submit"
+                // disabled={true}
+                // disabled
+                >Login</button>
             </form>
             </div>
         </div>
     )
 }
 
-export default observer(LoginPage);
-// export default LoginPage;
+// export default observer(LoginPage);
+export default LoginPage;

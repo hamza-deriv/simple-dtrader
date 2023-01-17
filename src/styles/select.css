@@ -1,0 +1,16 @@
+.markets {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+  }
+  .markets__markets-list {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #f2f2f2;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: 1rem;
+    border-color: #831d31;
+  }

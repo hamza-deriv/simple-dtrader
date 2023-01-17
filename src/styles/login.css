@@ -59,6 +59,10 @@ body {
   background: #395591;
 }
 
+.form button:active {
+    background: #fefefe;
+  }
+
 .form span {
   font-size: 40px;
   color: #4b6cb7;

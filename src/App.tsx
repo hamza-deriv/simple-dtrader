@@ -1,19 +1,36 @@
-import { useState, useRef, useEffect } from 'react'
-import Navbar from './components/Navbar'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
-import { AppRouter } from "./routes/AppRouter"
-import LoginPage from './pages/LoginPage';
+import { useState, useEffect } from 'react';
+import SignInModal from './components/layout/SignInModal';
+import Homepage from './components/pages/Homepage';
+import Header from './components/layout/Header';
+import './App.css';
+import { userEvents } from "./utils/eventListener.js";
 
 function App() {
+  const [isCartShown, setIsCartShown] = useState(false);
+
+  const CloseHandler = () => {
+    setIsCartShown(false);
+  };
+  const OpenHandler = () => {
+    setIsCartShown(true);
+  };
+
+  useEffect(() => {
+    userEvents.addListener("ECloseClicked", CloseHandler);
+    userEvents.addListener("EOpenClicked", OpenHandler);
+    return () => {
+      userEvents.removeListener("ECloseClicked", CloseHandler);
+      userEvents.removeListener("EOpenClicked", OpenHandler);
+    };
+  }, []);
+
   return (
     <>
-       {/* <Navbar /> */}
-      {/* <AppRouter /> */}
-      <LoginPage />
-   
+    {isCartShown && <SignInModal />}
+      <Header />
+      <Homepage />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

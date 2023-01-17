@@ -7,7 +7,6 @@ import {
 } from "../../utils/common.js";
 import Select from "../atomicComponnents/Select";
 import Loader from "../atomicComponnents/Loader";
-// import MainSummary from "./main-summary";
 import "../../styles/homepage.css";
 
 // TODO:
@@ -131,14 +130,12 @@ const Homepage = () => {
 
   return (
     <main className='main'>
-      {/* <MainSummary /> */}
       <section>
         <Select
           selectedOptionHandler={selectMarketHandler}
           defaultOption={"Select Market"}
           availableOptions={availableMarkets}
         />
-
         <Select
           selectedOptionHandler={selectSymbolHandler}
           defaultOption={"Select trade symbol"}

@@ -3,6 +3,7 @@ import SignInModal from './components/layout/SignInModal';
 import Homepage from './components/pages/Homepage';
 import Header from './components/layout/Header';
 import './App.css';
+// @ts-ignore
 import { userEvents } from "./utils/eventListener";
 
 function App() {

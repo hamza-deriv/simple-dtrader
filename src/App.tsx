@@ -3,7 +3,7 @@ import SignInModal from './components/layout/SignInModal';
 import Homepage from './components/pages/Homepage';
 import Header from './components/layout/Header';
 import './App.css';
-import { userEvents } from "./utils/eventListener.js";
+import { userEvents } from "./utils/eventListener";
 
 function App() {
   const [isCartShown, setIsCartShown] = useState(false);

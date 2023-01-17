@@ -2,7 +2,7 @@ import "../../styles/signin.css";
 import Avatar from 'react-avatar';
 import { userEvents } from "../../utils/eventListener";
 
-const SignInBtn = (props) => {
+const SignIn = (props) => {
   const openCard = () => {
     userEvents.emit("EOpenClicked");
   };
@@ -14,4 +14,4 @@ const SignInBtn = (props) => {
   );
 };
 
-export default SignInBtn;
+export default SignIn;

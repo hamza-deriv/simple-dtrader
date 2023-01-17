@@ -1,16 +1,16 @@
 import ReactDOM from "react-dom";
-import "../../styles/modal.css";
 import { userEvents } from "../../utils/eventListener.js";
+import "../../styles/modal.css";
 
 const Backdrop = () => {
-  const closeCart = () => {
+  const closeHandler = () => {
     userEvents.emit("ECloseClicked");
   };
 
-  return <div className='backdrop' onClick={closeCart} />;
+  return <div className='backdrop' onClick={closeHandler} />;
 };
 
-const ModalOverlay = (props) => {
+const ModalOverlay = (props:any) => {
   return (
     <div className='modal'>
       <div className='content'>{props.children}</div>
@@ -20,7 +20,7 @@ const ModalOverlay = (props) => {
 
 const portalElement = document.getElementById("overlays");
 
-const Modal = () => {
+const Modal = (props:any) => {
   return (
     <>
       {ReactDOM.createPortal(<Backdrop />, portalElement)}

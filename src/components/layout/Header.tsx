@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { userEvents } from "../../utils/eventListener.js";
+import { userEvents } from "../../utils/eventListener";
 import Logout from "./Logout";
 import SignInButton from "./SignInButton";
 // import chart from "../../assets/chart.png";
@@ -11,7 +11,7 @@ const Header = () => {
   const [userCurrency, setUserCurrency] = useState(null);
   const [userName, setUserName] = useState(null);
 
-  const EAuthorizeHandler = (data = null) => {
+  const EAuthorizeHandler = (data:any = null) => {
     console.log(data);
     if (!data) {
       setIsAuthorized(false);

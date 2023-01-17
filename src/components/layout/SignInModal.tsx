@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { userEvents } from "../../utils/eventListener.js";
+import React, { useState, useRef } from "react";
+import { userEvents } from "../../utils/eventListener";
 import { connection, api } from "../../utils/common.js";
 import Modal from "../atomicComponnents/Modal";
 import "../../styles/signinmodal.css";
@@ -7,13 +7,13 @@ import "../../styles/signinmodal.css";
 const SignInModal = (props) => {
   const [authError, setAuthError] = useState(false);
   const [isAPIValid, setisAPIValid] = useState(true);
-  const APITokenRef = useRef();
+  const APITokenRef = useRef<HTMLInputElement>(null);
 
   const closeCard = () => {
     userEvents.emit("ECloseClicked");
   };
 
-  const authorizeResponse = async (res) => {
+  const authorizeResponse = async (res:any) => {
     const data = JSON.parse(res.data);
 
     if (data.error !== undefined) {
@@ -30,7 +30,7 @@ const SignInModal = (props) => {
     }
   };
 
-  const getActiveSymbols = (userToken) => {
+  const getActiveSymbols = (userToken:string) => {
     connection.addEventListener("message", authorizeResponse);
     //This is my personal API tocken, you can use it for demo: eAfSynF3bEUwDif (demo acc with money) or MsKyCJHGNc6ve2a (real without money)
     api.send({
@@ -39,10 +39,13 @@ const SignInModal = (props) => {
     });
   };
 
-  const confirmHandler = (event) => {
+  const confirmHandler = (event:React.FormEvent) => {
     event.preventDefault();
 
-    const userAPIToken = APITokenRef.current.value;
+    if (!APITokenRef.current) {
+      return;
+    }
+    const userAPIToken: string | null = APITokenRef.current.value;
 
     if (userAPIToken.trim() === "") {
       setisAPIValid(false);

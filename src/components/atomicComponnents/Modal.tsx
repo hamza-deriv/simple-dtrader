@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import { userEvents } from "../../utils/eventListener.js";
+import { userEvents } from "../../utils/eventListener";
 import "../../styles/modal.css";
 
 const Backdrop = () => {
@@ -10,7 +10,7 @@ const Backdrop = () => {
   return <div className='backdrop' onClick={closeHandler} />;
 };
 
-const ModalOverlay = (props:any) => {
+const ModalOverlay:React.FC<{children: React.ReactNode}> = (props) => {
   return (
     <div className='modal'>
       <div className='content'>{props.children}</div>
@@ -19,9 +19,9 @@ const ModalOverlay = (props:any) => {
 };
 
 // New div for Modal Popups
-const portalElement = document.getElementById("overlay-div");
+const portalElement = document.getElementById("overlay-div") as HTMLElement;
 
-const Modal = (props:any) => {
+const Modal:React.FC<{children: React.ReactNode}> = (props) => {
   return (
     <>
       {ReactDOM.createPortal(<Backdrop />, portalElement)}

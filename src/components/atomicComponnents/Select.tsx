@@ -1,6 +1,6 @@
 import "../../styles/select.css";
 
-const Select = ({ selectedOptionHandler, defaultOption, availableOptions }) => {
+const Select: React.FC<{selectedOptionHandler: () => void, defaultOption:string, availableOptions:string[]}> = ({ selectedOptionHandler, defaultOption, availableOptions }) => {
   return (
     <div className='markets'>
       <select
@@ -9,7 +9,7 @@ const Select = ({ selectedOptionHandler, defaultOption, availableOptions }) => {
       >
         <option value={defaultOption}>{defaultOption}</option>
         {availableOptions.length &&
-          availableOptions.map((option, i) => (
+          availableOptions.map((option:string, i:number) => (
             <option value={option} key={i}>
               {option}
             </option>

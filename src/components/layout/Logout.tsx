@@ -1,6 +1,6 @@
 import "../../styles/signin.css";
 import { api } from "../../utils/common.js";
-import { userEvents } from "../../utils/eventListener.js";
+import { userEvents } from "../../utils/eventListener";
 
 const Logout = (props) => {
   const logOut = () => {

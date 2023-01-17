@@ -7,7 +7,7 @@ import "../../styles/signinmodal.css";
 const SignInModal = (props) => {
   const [authError, setAuthError] = useState(false);
   const [isAPIValid, setisAPIValid] = useState(true);
-  const APITockenRef = useRef();
+  const APITokenRef = useRef();
 
   const closeCard = () => {
     userEvents.emit("ECloseClicked");
@@ -30,11 +30,11 @@ const SignInModal = (props) => {
     }
   };
 
-  const getActiveSymbols = (userTocken) => {
+  const getActiveSymbols = (userToken) => {
     connection.addEventListener("message", authorizeResponse);
-    //This is my personal API tocken, you can use it for demo: QSw9m6F8QhPWf3Z (real acc without money) or PHMs7GYEsGpkaWC (demo with money)
+    //This is my personal API tocken, you can use it for demo: eAfSynF3bEUwDif (demo acc with money) or MsKyCJHGNc6ve2a (real without money)
     api.send({
-      authorize: userTocken,
+      authorize: userToken,
       req_id: 1,
     });
   };
@@ -42,7 +42,7 @@ const SignInModal = (props) => {
   const confirmHandler = (event) => {
     event.preventDefault();
 
-    const userAPIToken = APITockenRef.current.value;
+    const userAPIToken = APITokenRef.current.value;
 
     if (userAPIToken.trim() === "") {
       setisAPIValid(false);
@@ -79,7 +79,7 @@ const SignInModal = (props) => {
         <input
           type="text"
           id="apiToken"
-          ref={APITockenRef}
+          ref={APITokenRef}
           onChange={apiChange}
         />
       </div>

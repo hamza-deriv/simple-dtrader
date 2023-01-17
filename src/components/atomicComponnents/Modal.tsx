@@ -18,7 +18,8 @@ const ModalOverlay = (props:any) => {
   );
 };
 
-const portalElement = document.getElementById("overlays");
+// New div for Modal Popups
+const portalElement = document.getElementById("overlay-div");
 
 const Modal = (props:any) => {
   return (

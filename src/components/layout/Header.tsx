@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { userEvents } from "../../utils/eventListener.js";
 import Logout from "./Logout";
-import SignIn from "./SignIn";
+import SignInButton from "./SignInButton";
 // import chart from "../../assets/chart.png";
 import "../../styles/header.css";
 
@@ -34,7 +34,7 @@ const Header = () => {
     <>
       <header className='header'>
         <h1>Simple Trader</h1>
-        {!isAuthorized && <SignIn />}
+        {!isAuthorized && <SignInButton />}
         {isAuthorized && (
           <>
             <p>Hi, {userName} !</p>

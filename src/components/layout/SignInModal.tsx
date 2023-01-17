@@ -110,7 +110,7 @@ const SignInModal = (props) => {
 
   return (
     <Modal>
-      <p>Please, fill in the form below</p>
+      <p>Log in To Continue</p>
       <form className='form' onSubmit={confirmHandler}>
         {content}
       </form>

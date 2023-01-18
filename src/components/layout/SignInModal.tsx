@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { userEvents } from "../../utils/eventListener";
 import { connection, api } from "../../utils/common.js";
 import Modal from "../atomicComponents/Modal";
-import Loader from "../atomicComponents/Loader";
+// import Loader from "../atomicComponents/Loader";
 import "../../styles/signinmodal.css";
 
 const SignInModal = (props) => {

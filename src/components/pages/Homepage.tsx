@@ -7,6 +7,7 @@ import {
 } from "../../utils/common.js";
 import Select from "../atomicComponents/Select";
 import Loader from "../atomicComponents/Loader";
+import Button from '../atomicComponents/Button';
 import "../../styles/homepage.css";
 
 // TODO:
@@ -149,6 +150,10 @@ const Homepage = () => {
         />
       </section>
       <section>{tickValue}</section>
+      {tick &&
+        // (<section className="section-button"><Button title="Buy" />
+        // </section>)
+      }
     </main>
   );
 };

@@ -1,11 +1,19 @@
 .tick {
-    margin: 0 auto;
+    color: #160a0a;
     text-align: center;
     font-size: 6rem;
+    margin-left: 45rem;
+    margin-right: 45rem;
   }
   .warning {
-    color: white;
+    color: #aa0b20;
     margin: 2rem auto;
     text-align: center;
     font-size: 2rem;
+  }
+  .error-message{
+      color: #aa0b20;
+      margin: 2rem auto;
+      text-align: center;
+      font-size: 1rem;
   }

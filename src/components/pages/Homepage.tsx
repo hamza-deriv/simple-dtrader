@@ -19,6 +19,7 @@ const Homepage = () => {
   const [availableSymbols, setAvailableSymbols] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [choosenSymbol, setChoosenSymbol] = useState(null);
   const [serverResponse, setServerResponse] = useState([]);
   const [tick, setTick] = useState(null);
@@ -31,6 +32,7 @@ const Homepage = () => {
 
     if (data.error !== undefined) {
       setError(true);
+      setErrorMessage(data.error?.message);
       console.log("Error : ", data.error?.message);
       //connection.removeEventListener("message", activeResponse, false);
       setIsLoading(false);
@@ -117,15 +119,19 @@ const Homepage = () => {
   }, [activeResponse]);
 
   let tickValue = (
-    <div className='tick' style={{ color: tickColor, boxShadow: `5px 10px ${tickColor}` }}>
+    <p className='tick' style={{  borderStyle: `${tick ? 'solid' : 'none'}`, backgroundColor: `${tickColor}` }}>
       {tick}
-    </div>
+    </p>
   );
   if (isLoading) {
     tickValue = <Loader />;
   }
   if (error) {
-    tickValue = <h2 className='warning'>Oops...Something went wrong!</h2>;
+    console.log("ooopp")
+    tickValue = <>
+    <h2 className='warning'>Oops...Something went wrong!</h2>
+    {errorMessage && <h3 className='error-message'>{errorMessage}</h3>}
+    </>;
   }
 
   return (

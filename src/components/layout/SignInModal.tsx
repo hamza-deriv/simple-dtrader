@@ -68,20 +68,21 @@ const SignInModal = (props) => {
 
   let content = (
     <>
-      <div className='control'>
+      {/* <div className='control'>
         <label htmlFor="name">Email</label>
-        <input type="text" id="email" placeholder="Currently unavailable" />
+        <input type="text" id="email" placeholder="Currently unavailable" disabled/>
       </div>
       <div className='control'>
         <label htmlFor="street">Password</label>
-        <input type="text" id="password" placeholder="Currently unavailable" />
+        <input type="text" id="password" placeholder="Currently unavailable" disabled/>
       </div>
-      <p>Or</p>
+      <p>Or</p> */}
       <div className={nameControlClasses}>
         <label htmlFor="street">API token</label>
         <input
           type="text"
           id="apiToken"
+          placeholder="API Token"
           ref={APITokenRef}
           onChange={apiChange}
         />
@@ -90,7 +91,7 @@ const SignInModal = (props) => {
         <button className='button' type="button" onClick={closeCard}>
           Cancel
         </button>
-        <button className='button'>Log in</button>
+        <button className='button'>Authenticate</button>
       </div>
     </>
   );
@@ -114,6 +115,7 @@ const SignInModal = (props) => {
   return (
     <Modal>
       <p>Log in To Continue</p>
+      <p>Get Authenticated Token from <a href="https://www.binary.com/en/user/security/api_tokenws">here</a></p>
       <form className='form' onSubmit={confirmHandler}>
         {content}
       </form>

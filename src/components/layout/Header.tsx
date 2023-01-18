@@ -4,7 +4,7 @@ import Logout from "./Logout";
 import SignInButton from "./SignInButton";
 // import chart from "../../assets/chart.png";
 import "../../styles/header.css";
-import UserContext from "../../store/user-context";
+import UserContext from "../../stores/user-context";
 
 const Header = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -39,7 +39,7 @@ const Header = () => {
     <>
       <header className='header'>
         <h1>Simple Trader</h1>
-        {!userContext.isAuthorized && <SignInBtn />}
+        {!userContext.isAuthorized && <SignInButton />}
         {userContext.isAuthorized && (
           <>
             <p>Hi, {userName} !</p>

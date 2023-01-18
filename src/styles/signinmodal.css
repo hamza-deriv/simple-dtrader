@@ -1,6 +1,6 @@
 .form {
     margin: 1rem 0;
-    height: 22rem;
+    height: 10rem;
     overflow: auto;
   }
   
@@ -20,7 +20,7 @@
   .control input {
     font: inherit;
     border: 1px solid #ccc;
-    width: 20rem;
+    width: 22rem;
     max-width: 100%;
     outline: 0;
     background: #f2f2f2;
@@ -74,14 +74,14 @@
     background-color: transparent;
     border: 1px solid #8a2b06;
     padding: 0.5rem 2rem;
-    border-radius: 25px;
+    border-radius: 10px;
     margin-left: 1rem;
   }
   
   .actions button:hover,
   .actions button:active {
-    background-color: #c66569;
-    border-color: #c66569;
+    background-color: #cecece;
+    border-color: #cecece;
     color: #050303;
   }
   
@@ -93,12 +93,12 @@
     cursor: pointer;
     font: inherit;
     border: none;
-    background-color: #831d31;
-    color: #160b0a;
+    background-color: #160b0a;
+    color: #ffeff1;
     padding: 0.75rem 3rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-radius: 25px;
+    border-radius: 10px;
     font-weight: bold;
   }

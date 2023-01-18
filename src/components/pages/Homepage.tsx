@@ -142,7 +142,7 @@ const Homepage = () => {
           availableOptions={availableSymbols}
         />
       </section>
-      {tickValue}
+      <section>{tickValue}</section>
     </main>
   );
 };

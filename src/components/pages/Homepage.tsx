@@ -150,10 +150,10 @@ const Homepage = () => {
         />
       </section>
       <section>{tickValue}</section>
-      {tick &&
-        // (<section className="section-button"><Button title="Buy" />
-        // </section>)
-      }
+      {/* {tick &&
+        (<section className="section-button"><Button title="Buy" />
+        </section>)
+      } */}
     </main>
   );
 };

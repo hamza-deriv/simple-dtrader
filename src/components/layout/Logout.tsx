@@ -7,7 +7,7 @@ const Logout = (props) => {
     api.send({
       logout: 1,
     });
-    userEvents.emit("EAuthorize");
+    userEvents.emit("Authorize");
   };
 
   return (

@@ -3,7 +3,7 @@ import { userEvents } from "../../utils/eventListener";
 
 const SignInButton = (props) => {
   const openCard = () => {
-    userEvents.emit("EOpenClicked");
+    userEvents.emit("OpenSignInModal");
   };
 
   return (

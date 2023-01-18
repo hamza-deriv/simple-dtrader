@@ -1,5 +1,4 @@
-import DerivAPIBasic from "https://cdn.skypack.dev/@deriv/deriv-api/dist/DerivAPIBasic";
-// import DerivAPIBasic from "@deriv/deriv-api/dist/DerivAPIBasic";
+import DerivAPIBasic from "@deriv/deriv-api/dist/DerivAPIBasic";
 
 const app_id = 1089;
 

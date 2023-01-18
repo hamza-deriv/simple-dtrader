@@ -13,7 +13,7 @@ const Header = () => {
   const [userCurrency, setUserCurrency] = useState(null);
   const [userName, setUserName] = useState(null);
 
-  const EAuthorizeHandler = (data:any = null) => {
+  const authorizeHandler = (data:any = null) => {
     console.log(data);
     if (!data) {
       setIsAuthorized(false);
@@ -29,9 +29,9 @@ const Header = () => {
   };
 
   useEffect(() => {
-    userEvents.addListener("EAuthorize", EAuthorizeHandler);
+    userEvents.addListener("Authorize", authorizeHandler);
     return () => {
-      userEvents.removeListener("EAuthorize", EAuthorizeHandler);
+      userEvents.removeListener("Authorize", authorizeHandler);
     };
   }, []);
 
@@ -42,7 +42,7 @@ const Header = () => {
         {!userContext.isAuthorized && <SignInButton />}
         {userContext.isAuthorized && (
           <>
-            <p>Hi, {userName} !</p>
+            <p>Hi, {userName || 'John Doe'} !</p>
             <p>
               {userBalance} {userCurrency}
             </p>

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@deriv/deriv-api": "^1.0.11",
     "@types/react-router-dom": "5.3.3",
     "bootstrap": "^5.2.3",
     "email-validator": "^2.0.4",

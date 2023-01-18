@@ -102,3 +102,16 @@
     border-radius: 10px;
     font-weight: bold;
   }
+
+  .error-heading{
+    font-size: 20px;
+    font-weight: 600;
+    color: red;
+
+  }
+  .error-subheading{
+    font-size: 16px;
+    font-weight: 400;
+    color: red;
+  }
+

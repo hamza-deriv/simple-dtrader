@@ -8,28 +8,28 @@ import './App.css';
 import { userEvents } from "./utils/eventListener";
 
 function App() {
-  const [isCartShown, setIsCartShown] = useState(false);
+  const [showSignInModal, setShowSignIn] = useState<boolean>(false);
 
-  const CloseHandler = () => {
-    setIsCartShown(false);
+  const closeSignInModal = () => {
+    setShowSignIn(false);
   };
-  const OpenHandler = () => {
-    setIsCartShown(true);
+  const openSignInModal = () => {
+    setShowSignIn(true);
   };
 
   useEffect(() => {
-    userEvents.addListener("ECloseClicked", CloseHandler);
-    userEvents.addListener("EOpenClicked", OpenHandler);
+    userEvents.addListener("CloseSignInModal", closeSignInModal);
+    userEvents.addListener("OpenSignInModal", openSignInModal);
     return () => {
-      userEvents.removeListener("ECloseClicked", CloseHandler);
-      userEvents.removeListener("EOpenClicked", OpenHandler);
+      userEvents.removeListener("CloseSignInModal", closeSignInModal);
+      userEvents.removeListener("OpenSignInModal", openSignInModal);
     };
   }, []);
 
   return (
     <>
     <UserProvider>
-      {isCartShown && <SignInModal />}
+      {showSignInModal && <SignInModal />}
       <Header />
       <Homepage />
     </UserProvider>

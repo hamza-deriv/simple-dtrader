@@ -1,32 +1,32 @@
 import React, { useState, useRef } from "react";
 import { userEvents } from "../../utils/eventListener";
 import { connection, api } from "../../utils/common.js";
-import Modal from "../atomicComponnents/Modal";
+import Modal from "../atomicComponents/Modal";
+import Loader from "../atomicComponents/Loader";
 import "../../styles/signinmodal.css";
 
 const SignInModal = (props) => {
-  const [authError, setAuthError] = useState(false);
-  const [isAPIValid, setisAPIValid] = useState(true);
+  const [authenticationError, setAuthenticationError] = useState<boolean>(false);
+  const [isAPIValid, setisAPIValid] = useState<boolean>(true);
+  // const [isLoading, setIsLoading]= useState<boolean>(false);
   const APITokenRef = useRef<HTMLInputElement>(null);
 
-  const closeCard = () => {
-    userEvents.emit("ECloseClicked");
+  const closeModal = () => {
+    userEvents.emit("CloseSignInModal");
   };
 
   const authorizeResponse = async (res:any) => {
     const data = JSON.parse(res.data);
 
     if (data.error !== undefined) {
-      setAuthError(true);
+      setAuthenticationError(true);
       console.log("Error : ", data.error?.message);
-      //connection.removeEventListener("message", activeResponse, false);
       return;
-      //await api.disconnect();
     }
 
     if (data.msg_type === "authorize") {
-      closeCard();
-      userEvents.emit("EAuthorize", data);
+      closeModal();
+      userEvents.emit("Authorize", data);
     }
   };
 
@@ -41,21 +41,25 @@ const SignInModal = (props) => {
 
   const confirmHandler = (event:React.FormEvent) => {
     event.preventDefault();
+    // setIsLoading(true);
 
     if (!APITokenRef.current) {
+      // setIsLoading(false)
       return;
     }
     const userAPIToken: string | null = APITokenRef.current.value;
 
     if (userAPIToken.trim() === "") {
       setisAPIValid(false);
+      // setIsLoading(false)
       return;
     }
 
     getActiveSymbols(userAPIToken);
+    // setIsLoading(false)
   };
 
-  const nameControlClasses = `${'control'} ${
+  const formControl = `${'control'} ${
     isAPIValid ? "" : 'invalid'
   }`;
 
@@ -66,18 +70,9 @@ const SignInModal = (props) => {
     setisAPIValid(true);
   };
 
-  let content = (
+  let formBody = (
     <>
-      {/* <div className='control'>
-        <label htmlFor="name">Email</label>
-        <input type="text" id="email" placeholder="Currently unavailable" disabled/>
-      </div>
-      <div className='control'>
-        <label htmlFor="street">Password</label>
-        <input type="text" id="password" placeholder="Currently unavailable" disabled/>
-      </div>
-      <p>Or</p> */}
-      <div className={nameControlClasses}>
+      <div className={formControl}>
         <label htmlFor="street">API token</label>
         <input
           type="text"
@@ -88,7 +83,7 @@ const SignInModal = (props) => {
         />
       </div>
       <div className='actions'>
-        <button className='button' type="button" onClick={closeCard}>
+        <button className='button' type="button" onClick={closeModal}>
           Cancel
         </button>
         <button className='button'>Authenticate</button>
@@ -96,15 +91,15 @@ const SignInModal = (props) => {
     </>
   );
 
-  if (authError) {
+  if (authenticationError) {
     return (
       <Modal>
         <div className='control'>
-          <p> Opps, something went wrong!</p>
-          <p> Please, check you API token</p>
+          <p className="error-heading"> Opps, something went wrong!</p>
+          <p className="error-subheading"> Please, check you API token</p>
         </div>
         <div className='actions'>
-          <button className='button' type="button" onClick={closeCard}>
+          <button className='button' type="button" onClick={closeModal}>
             Cancel
           </button>
         </div>
@@ -117,7 +112,7 @@ const SignInModal = (props) => {
       <p>Log in To Continue</p>
       <p>Get Authenticated Token from <a href="https://www.binary.com/en/user/security/api_tokenws">here</a></p>
       <form className='form' onSubmit={confirmHandler}>
-        {content}
+        {formBody}
       </form>
     </Modal>
   );

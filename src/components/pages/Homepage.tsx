@@ -5,8 +5,8 @@ import {
   active_symbols_request,
   ticks_request,
 } from "../../utils/common.js";
-import Select from "../atomicComponnents/Select";
-import Loader from "../atomicComponnents/Loader";
+import Select from "../atomicComponents/Select";
+import Loader from "../atomicComponents/Loader";
 import "../../styles/homepage.css";
 
 // TODO:

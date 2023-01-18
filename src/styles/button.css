@@ -1,0 +1,13 @@
+.button-atomic{
+    cursor: pointer;
+    font: inherit;
+    border: none;
+    background-color: #e6d9dc;
+    color: #160b0a;
+    padding: 0.75rem 3rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    font-weight: bold;
+}

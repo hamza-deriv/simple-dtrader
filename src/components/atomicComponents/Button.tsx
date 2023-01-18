@@ -3,16 +3,16 @@ import "../../styles/button.css";
 
 type TButton = {
     title: string,
-    // title2: string
+    className: string
 }
 const Button = (props:TButton) => {
 
-const openCard = () => {
+const openTrade = () => {
     userEvents.emit("OpenSignInModal");
     };
     return (
         <>
-        <button className='button-atomic' onClick={openCard}>
+        <button className={props.className} onClick={openTrade}>
         <span>{props.title}</span>
         </button>
         </>

@@ -1,13 +1,34 @@
-.button-atomic{
+.button-atomic-buy{
     cursor: pointer;
     font: inherit;
     border: none;
-    background-color: #e6d9dc;
-    color: #160b0a;
+    background-color: #4bb4b3;
+    color: #f2f2f2;
     padding: 0.75rem 3rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
     border-radius: 10px;
     font-weight: bold;
+}
+.button-atomic-buy:hover{
+    background-color: #589898;
+    color: #f2f2f2;
+}
+.button-atomic-sell{
+    cursor: pointer;
+    font: inherit;
+    border: none;
+    background-color: #ff444f;
+    color: #f2f2f2;
+    padding: 0.75rem 3rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    font-weight: bold;
+}
+.button-atomic-sell:hover{
+    background-color: #b3242d;
+    color: #f2f2f2;
 }

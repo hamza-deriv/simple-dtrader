@@ -51,7 +51,7 @@ const Homepage = () => {
     if (data.msg_type === "tick") {
       setTick((prev) => {
         if (prev > data.tick.bid) {
-          setTickColor("#8a2b06");
+          setTickColor("#b3242d");
         } else {
           setTickColor("#047553");
         }
@@ -150,10 +150,14 @@ const Homepage = () => {
         />
       </section>
       <section>{tickValue}</section>
-      {/* {tick &&
-        (<section className="section-button"><Button title="Buy" />
-        </section>)
-      } */}
+      {tick &&
+        (
+          <section className="section-button">
+            <Button className="button-atomic-buy" title="Buy" />
+            <Button className="button-atomic-sell" title="Sell" />
+          </section>
+        )
+      }
     </main>
   );
 };

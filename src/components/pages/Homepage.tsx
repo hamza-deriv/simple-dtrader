@@ -22,7 +22,7 @@ const Homepage = () => {
   const userContext = useContext(UserContext);
   const [availableMarkets, setAvailableMarkets] = useState([]);
   const [availableSymbols, setAvailableSymbols] = useState([]);
-  const [availableTradeTypes, setavailableTradeTypes] = useState([]);
+  const [availableTradeTypes, setAvailableTradeTypes] = useState([]);
   const [allTradeTypes, setAllTradeTypes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -69,7 +69,7 @@ const Homepage = () => {
 
     if (data.msg_type === "contracts_for") {
       setAllTradeTypes(data.contracts_for.available);
-      setavailableTradeTypes([
+      setAvailableTradeTypes([
         ...new Set(
           data.contracts_for.available.map(
             (item) => item.contract_category_display
@@ -141,7 +141,7 @@ const Homepage = () => {
     api.subscribe(ticks_request);
     if (userContext.isAuthorized) {
       setAllTradeTypes([]);
-      setavailableTradeTypes([]);
+      setAvailableTradeTypes([]);
       const contracts_for_symbol_request = {
         contracts_for: choosenSymbol,
         currency: userContext?.userData?.authorize?.currency

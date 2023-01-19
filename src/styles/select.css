@@ -1,11 +1,11 @@
-.markets {
+.select-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 2rem 0;
   }
-  .markets__markets-list {
-    width: 50%;
+  .select-list {
+    width: 65%;
     padding: 10px;
     border: 1px solid #f2f2f2;
     cursor: pointer;

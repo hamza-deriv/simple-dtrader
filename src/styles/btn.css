@@ -1,0 +1,29 @@
+.button {
+    width: 250px;
+    margin: 10px auto;
+    cursor: pointer;
+    font: inherit;
+    border: none;
+    background-color: #8a2b06;
+    color: white;
+    padding: 0.75rem 3rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 25px;
+    font-weight: bold;
+  }
+  
+  .button:hover,
+  .button:active {
+    background-color: #4d1601;
+  }
+  
+  .green {
+    background-color: #047553;
+  }
+  
+  .green:hover,
+  .green:active {
+    background-color: #035039;
+  }

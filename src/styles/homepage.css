@@ -9,7 +9,7 @@
     color: #aa0b20;
     margin: 2rem auto;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1rem;
   }
   .error-message{
       color: #aa0b20;
@@ -25,3 +25,28 @@
     margin-top:10rem;
     /* margin-left:45rem; */
   }
+  .tick-container {
+    max-width: 1200px;
+    margin: 10px auto 30px auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .trade-interface {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 0 0 35%;
+  }
+  @media (max-width: 800px) {
+    .tick-container {
+      flex-direction: column;
+      justify-content: center;
+    }
+  
+    .trade-interface,
+    .tick {
+      width: 350px;
+    }
+  }  

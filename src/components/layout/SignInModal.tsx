@@ -104,7 +104,7 @@ const SignInModal = (props:any) => {
   return (
     <Modal>
       <p>Log in To Continue</p>
-      <p>Get Authenticated Token from <a href="https://www.binary.com/en/user/security/api_tokenws">here</a></p>
+      <p>Get Authenticated Token from <a href="https://app.deriv.com/">here</a></p>
       <form className='form' onSubmit={confirmHandler}>
         {formBody}
       </form>

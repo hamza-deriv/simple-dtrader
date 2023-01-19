@@ -128,7 +128,7 @@ const Homepage = () => {
 
     ticks_request.ticks_history = selectedSymbol;
 
-    ws_connection.subscribe(ticks_request);
+    ws_connection.send(ticks_request);
     if (userContext.isAuthorized) {
       setAllTradeTypes([]);
       setAvailableTradeTypes([]);
@@ -144,7 +144,7 @@ const Homepage = () => {
         ws_connection.send(contracts_for_symbol_request);
     }
     setIsLoading(false);
-  }, [selectedSymbol, userContext]);
+  }, [selectedSymbol, userContext, error]);
 
   useEffect(() => {
     setIsLoading(true);

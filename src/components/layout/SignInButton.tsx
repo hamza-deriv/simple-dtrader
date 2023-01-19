@@ -1,7 +1,7 @@
 import "../../styles/signin.css";
 import { userEvents } from "../../utils/eventListener";
 
-const SignInButton = (props) => {
+const SignInButton = (props:any) => {
   const openCard = () => {
     userEvents.emit("OpenSignInModal");
   };

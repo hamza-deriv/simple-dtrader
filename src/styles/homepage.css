@@ -5,6 +5,10 @@
     margin-left: 45rem;
     margin-right: 45rem;
   }
+  .heading{
+    margin-left:22rem;
+    text-decoration:underline
+  }
   .warning {
     color: #aa0b20;
     margin: 2rem auto;

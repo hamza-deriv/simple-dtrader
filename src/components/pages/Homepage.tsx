@@ -1,39 +1,32 @@
 import { useEffect, useState, useCallback, useContext } from "react";
 import {
   connection,
-  api,
+  ws_connection,
   active_symbols_request,
   ticks_request,
 } from "../../utils/common.js";
 import UserContext from "../../stores/user-context";
 import Select from "../atomicComponents/Select";
 import Loader from "../atomicComponents/Loader";
-import Button from '../atomicComponents/Button';
-import Btn from '../atomicComponents/Btn';
-import RangeTicks from "../atomicComponents/RangeTicks";
 import TradeType from "../atomicComponents/TradeType.js";
 import "../../styles/homepage.css";
 
-// TODO:
-// 2) Trade type (options)
-// 3) Buy / sell btn
-// 6) TS
-
 const Homepage = () => {
   const userContext = useContext(UserContext);
-  const [availableMarkets, setAvailableMarkets] = useState([]);
-  const [availableSymbols, setAvailableSymbols] = useState([]);
-  const [availableTradeTypes, setAvailableTradeTypes] = useState([]);
-  const [allTradeTypes, setAllTradeTypes] = useState([]);
+  const [availableMarkets, setAvailableMarkets] = useState<any>([]);
+  const [availableSymbols, setAvailableSymbols] = useState<any>([]);
+  const [availableTradeTypes, setAvailableTradeTypes] = useState<any>([]);
+  const [allTradeTypes, setAllTradeTypes] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [choosenSymbol, setChoosenSymbol] = useState(null);
+  const [selectedSymbol, setSelectedSymbol] = useState(null);
   const [serverResponse, setServerResponse] = useState([]);
   const [tick, setTick] = useState(null);
   const [tickColor, setTickColor] = useState("#047553");
+  const [buttonTitle, setButtonTitle] = useState<any>([]);
 
-  const activeResponse = useCallback(async (res) => {
+  const activeResponse = useCallback(async (res:any) => {
     setIsLoading(true);
 
     const data = JSON.parse(res.data);
@@ -82,7 +75,7 @@ const Homepage = () => {
   }, []);
 
   const selectMarketHandler = (e) => {
-    setChoosenSymbol(null);
+    setSelectedSymbol(null);
     setTick(null);
 
     if (e.target.value === "Select Market") {
@@ -96,62 +89,69 @@ const Homepage = () => {
     );
   };
 
+  const selectTradeTypeHandler = (e) => {
+    if (e.target.value === "Select trade symbol") {
+      return;
+    }
+    setButtonTitle([
+      ...new Set(
+        allTradeTypes
+          .filter((item) => item.contract_category_display === e.target.value)
+          .map((item) => item.contract_display)
+      ),
+    ]);
+  };
+
   const selectSymbolHandler = (e) => {
     setTick(null);
-    setChoosenSymbol(null);
-    setError(null);
+    setSelectedSymbol(null);
+    setError(false);
     setAllTradeTypes([]);
 
     if (e.target.value === "Select trade symbol") {
       return;
     }
-    setChoosenSymbol(
-      serverResponse.find((item) => item.display_name === e.target.value).symbol
+    setSelectedSymbol(
+      serverResponse?.find((item) => item.display_name === e.target.value).symbol
     );
-  };
-
-  const selectTradeTypeHandler = (e) => {
-    if (e.target.value === "Select trade symbol") {
-      return;
-    }
   };
 
   useEffect(() => {
     setIsLoading(true);
-    api.send({
+    ws_connection.send({
       forget_all: "ticks",
     });
 
-    if (choosenSymbol === null) {
+    if (selectedSymbol === null) {
       return;
     }
 
-    ticks_request.ticks_history = choosenSymbol;
+    ticks_request.ticks_history = selectedSymbol;
 
-    api.subscribe(ticks_request);
+    ws_connection.subscribe(ticks_request);
     if (userContext.isAuthorized) {
       setAllTradeTypes([]);
       setAvailableTradeTypes([]);
       const contracts_for_symbol_request = {
-        contracts_for: choosenSymbol,
-        currency: userContext?.userData?.authorize?.currency
-          ? userContext?.userData?.authorize?.currency
-          : "USD",
-        landing_company: "svg",
-        product_type: "basic",
-      };
+          contracts_for: selectedSymbol,
+          currency: userContext?.userData?.authorize?.currency
+            ? userContext?.userData?.authorize?.currency
+            : "USD",
+          landing_company: "svg",
+          product_type: "basic",
+        };
 
-      api.send(contracts_for_symbol_request);
+        ws_connection.send(contracts_for_symbol_request);
     }
     setIsLoading(false);
-  }, [choosenSymbol, userContext]);
+  }, [selectedSymbol, userContext]);
 
   useEffect(() => {
     setIsLoading(true);
 
     const getActiveSymbols = async () => {
       connection.addEventListener("message", activeResponse);
-      await api.send(active_symbols_request);
+      await ws_connection.send(active_symbols_request);
     };
 
     getActiveSymbols();
@@ -169,6 +169,8 @@ console.log(userContext)
             selectedOptionHandler={selectTradeTypeHandler}
             defaultOption={"Select Trade type"}
             availableOptions={availableTradeTypes}
+            buttonTitle={buttonTitle}
+
         />
       )}
     </>
@@ -192,22 +194,17 @@ console.log(userContext)
   if (isLoading) {
     tickValue = <Loader />;
   }
-  // if (error) {
-  //   console.log("ooopp")
-  //   tickValue = <>
-  //   <h2 className='warning'>Oops...Something went wrong!</h2>
-  //   {errorMessage && <h3 className='error-message'>{errorMessage}</h3>}
-  //   </>;
-  // }
 
   return (
     <main className='main'>
       <section>
+        <h3 className="heading">Select Market</h3>
         <Select
           selectedOptionHandler={selectMarketHandler}
           defaultOption={"Select Market"}
           availableOptions={availableMarkets}
         />
+        <h3 className="heading">Select Active Pairs/Symbols</h3>
         <Select
           selectedOptionHandler={selectSymbolHandler}
           defaultOption={"Select trade symbol"}

@@ -1,5 +1,3 @@
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import { observer } from "mobx-react";
 import "../styles/login.css";
 import { useState } from "react";
 
@@ -12,8 +10,6 @@ type LoginToken = {
     is_logged_in: boolean
 
 }
-  
-//   type Props = RouteComponentProps<RouterProps>;
   
   type State = {
     username: string,
@@ -28,9 +24,6 @@ const LoginPage = () => {
 
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    // const [is_disabled, setIsDisabled] = useState<boolean>(false)
-    // const [loading, setLoading] = useState<boolean>(false)
-    // const [message, setMessage] = useState<string>('')
 
 
       const handleSubmit = () =>{
@@ -50,11 +43,8 @@ const LoginPage = () => {
             }
             )
             .then(data => {
-                // setLoading(false)
-                // setMessage(data)
                 console.log(data)
             })
-        // e.preventDefault();
       }
 
     return (

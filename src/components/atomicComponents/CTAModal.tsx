@@ -19,15 +19,15 @@ const CTAModalOverlay:React.FC<{children: React.ReactNode}> = (props) => {
 };
 
 // New div for Modal Popups
-const portalElement = document.getElementById("overlay-div-modal") as HTMLElement;
+const popupModal = document.getElementById("overlay-div-modal") as HTMLElement;
 
 const CTAModal:React.FC<{children: React.ReactNode}> = (props) => {
   return (
     <>
-      {ReactDOM.createPortal(<CTABackdrop />, portalElement)}
+      {ReactDOM.createPortal(<CTABackdrop />, popupModal)}
       {ReactDOM.createPortal(
         <CTAModalOverlay>{props.children}</CTAModalOverlay>,
-        portalElement
+        popupModal
       )}
     </>
   );

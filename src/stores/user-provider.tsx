@@ -1,7 +1,7 @@
 import UserContext from "./user-context";
 import { useReducer } from "react";
 
-const defaultuserState = {
+const defaultUserState = {
   userData: {},
   isAuthorized: false,
 };
@@ -20,27 +20,27 @@ const userReducer = (state, action) => {
     };
   }
 
-  return defaultuserState;
+  return defaultUserState;
 };
 
-const UserProvider = (props) => {
-  const [userState, dispathUserAction] = useReducer(
+const UserProvider = (props:any) => {
+  const [userState, dispatchUser] = useReducer(
     userReducer,
-    defaultuserState
+    defaultUserState
   );
 
-  const addUserDataHandler = (data) => {
-    dispathUserAction({ type: "ADD", item: data });
+  const addUserData = (data) => {
+    dispatchUser({ type: "ADD", item: data });
   };
-  const changeIsAuthorizedHandler = (bool) => {
-    dispathUserAction({ type: "ISAUTHORIZE", val: bool });
+  const changeIsAuthorized = (bool) => {
+    dispatchUser({ type: "ISAUTHORIZE", val: bool });
   };
 
   const userContext = {
     userData: userState.userData,
     isAuthorized: userState.isAuthorized,
-    addUserData: addUserDataHandler,
-    changeIsAuthorized: changeIsAuthorizedHandler,
+    addUserData,
+    changeIsAuthorized,
   };
 
   return (

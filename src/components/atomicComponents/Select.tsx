@@ -1,8 +1,15 @@
 import "../../styles/select.css";
 
-const Select: React.FC<{selectedOptionHandler: () => void, defaultOption:string, availableOptions:string[]}> = ({ selectedOptionHandler, defaultOption, availableOptions }) => {
+type TSelectProps = {
+  selectedOptionHandler:() => void, 
+  defaultOption:string, 
+  availableOptions:string[] 
+}
+
+const Select: React.FC<TSelectProps> = (props:TSelectProps) => {
+  const {selectedOptionHandler, defaultOption, availableOptions} = props;
   return (
-    <div className='select-wrapper'>
+    <div className='select'>
       <select
         onChange={selectedOptionHandler}
         className={'select-list'}

@@ -2,7 +2,6 @@ import { useEffect, useState, useContext } from "react";
 import { userEvents } from "../../utils/eventListener";
 import Logout from "./Logout";
 import SignInButton from "./SignInButton";
-// import chart from "../../assets/chart.png";
 import "../../styles/header.css";
 import UserContext from "../../stores/user-context";
 
@@ -13,8 +12,7 @@ const Header = () => {
   const [userCurrency, setUserCurrency] = useState(null);
   const [userName, setUserName] = useState(null);
 
-  const authorizeHandler = (data:any = null) => {
-    console.log(data);
+  const authorizationHandler = (data:any = null) => {
     if (!data) {
       setIsAuthorized(false);
       userContext.changeIsAuthorized(false);
@@ -29,9 +27,9 @@ const Header = () => {
   };
 
   useEffect(() => {
-    userEvents.addListener("Authorize", authorizeHandler);
+    userEvents.addListener("Authorize", authorizationHandler);
     return () => {
-      userEvents.removeListener("Authorize", authorizeHandler);
+      userEvents.removeListener("Authorize", authorizationHandler);
     };
   }, []);
 
@@ -42,7 +40,7 @@ const Header = () => {
         {!userContext.isAuthorized && <SignInButton />}
         {userContext.isAuthorized && (
           <>
-            <p>Hi, {userName || 'John Doe'} !</p>
+            <p>Welcome, {userName ? userName : 'John Doe'} !</p>
             <p>
               {userBalance} {userCurrency}
             </p>

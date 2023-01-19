@@ -1,10 +1,10 @@
 import "../../styles/signin.css";
-import { api } from "../../utils/common.js";
+import { ws_connection } from "../../utils/common.js";
 import { userEvents } from "../../utils/eventListener";
 
-const Logout = (props) => {
+const Logout = (props:any) => {
   const logOut = () => {
-    api.send({
+    ws_connection.send({
       logout: 1,
     });
     userEvents.emit("Authorize");

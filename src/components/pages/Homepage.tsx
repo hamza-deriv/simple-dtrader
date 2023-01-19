@@ -11,6 +11,7 @@ import Loader from "../atomicComponents/Loader";
 import Button from '../atomicComponents/Button';
 import Btn from '../atomicComponents/Btn';
 import RangeTicks from "../atomicComponents/RangeTicks";
+import TradeType from "../atomicComponents/TradeType.js";
 import "../../styles/homepage.css";
 
 // TODO:
@@ -29,7 +30,6 @@ const Homepage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [choosenSymbol, setChoosenSymbol] = useState(null);
   const [serverResponse, setServerResponse] = useState([]);
-  const [buttonNamesArray, setButtonNamesArray] = useState([]);
   const [tick, setTick] = useState(null);
   const [tickColor, setTickColor] = useState("#047553");
 
@@ -42,11 +42,8 @@ const Homepage = () => {
       setError(data.error?.message);
       console.log("Error: ", data.error?.message);
       setErrorMessage(data.error?.message);
-      // console.log("Error : ", data.error?.message);
-      //connection.removeEventListener("message", activeResponse, false);
       setIsLoading(false);
       return;
-      //await api.disconnect();
     }
 
     if (data.msg_type === "active_symbols") {
@@ -55,6 +52,8 @@ const Homepage = () => {
         ...new Set(data.active_symbols.map((item) => item.market_display_name)),
       ]);
     }
+
+    console.log(data,data.msg_type)
 
     if (data.msg_type === "tick") {
       setTick((prev) => {
@@ -101,7 +100,6 @@ const Homepage = () => {
     setTick(null);
     setChoosenSymbol(null);
     setError(null);
-    setButtonNamesArray([]);
     setAllTradeTypes([]);
 
     if (e.target.value === "Select trade symbol") {
@@ -116,14 +114,6 @@ const Homepage = () => {
     if (e.target.value === "Select trade symbol") {
       return;
     }
-
-    setButtonNamesArray([
-      ...new Set(
-        allTradeTypes
-          .filter((item) => item.contract_category_display === e.target.value)
-          .map((item) => item.contract_display)
-      ),
-    ]);
   };
 
   useEffect(() => {
@@ -170,61 +160,45 @@ const Homepage = () => {
       connection.removeEventListener("message", activeResponse, false);
     };
   }, [activeResponse]);
-
-  // let tickValue = (
-  //   <p className='tick' style={{  borderStyle: `${tick ? 'solid' : 'none'}`, backgroundColor: `${tickColor}` }}>
-  //     {tick}
-  //   </p>
-  // );
-
+console.log(userContext)
   let tickValue = null;
+  let tradeType = 
+  <>
+    {tick && userContext.isAuthorized && (        
+        <TradeType 
+            selectedOptionHandler={selectTradeTypeHandler}
+            defaultOption={"Select Trade type"}
+            availableOptions={availableTradeTypes}
+        />
+      )}
+    </>
+
   if (tick) {
     tickValue = (
       <div className="tick-container">
         <p className='tick' style={{  borderStyle: `${tick ? 'solid' : 'none'}`, backgroundColor: `${tickColor}` }}>
         {tick}
        </p>
-        {userContext.isAuthorized && (
-          <div className="trade-interface">
-            <Select
-              selectedOptionHandler={selectTradeTypeHandler}
-              defaultOption={"Select Trade type"}
-              availibleOptions={availableTradeTypes}
-            />
-            <RangeTicks />
-            <Btn
-              btnName={buttonNamesArray[0] ? buttonNamesArray[0] : "Up"}
-              isGreen={true}
-            />
-            <Btn btnName={buttonNamesArray[1] ? buttonNamesArray[1] : "Down"} />
-          </div>
-        )}
       </div>
     );
+    if (error)
+    {
+      tickValue = <>
+      <h2 className='warning'>Oops...Something went wrong!</h2>
+      {errorMessage && <h3 className='error-message'>{errorMessage}</h3>}
+      </>;
+    }
   }
   if (isLoading) {
     tickValue = <Loader />;
   }
-  let info = null;
-  if (choosenSymbol && userContext.isAuthorized) {
-    info = (
-      <>
-        <p className={'warning'}>Please, choose the Trade type{error}</p>
-      </>
-    );
-  }
-  if (error) {
-    console.log("ooopp")
-    // tickValue = <>
-    // <h2 className='warning'>Oops...Something went wrong!</h2>
-    // {errorMessage && <h3 className='error-message'>{errorMessage}</h3>}
-    // </>;
-    info = (
-      <>
-        <p className={'warning'}>Oops...Something went wrong! {error}</p>
-      </>
-    );
-  }
+  // if (error) {
+  //   console.log("ooopp")
+  //   tickValue = <>
+  //   <h2 className='warning'>Oops...Something went wrong!</h2>
+  //   {errorMessage && <h3 className='error-message'>{errorMessage}</h3>}
+  //   </>;
+  // }
 
   return (
     <main className='main'>
@@ -241,15 +215,7 @@ const Homepage = () => {
         />
       </section>
       <section>{tickValue}</section>
-      <section>{info}</section> 
-      {/* {tick &&
-        (
-          <section className="section-button">
-            <Button className="button-atomic-buy" title="Buy" />
-            <Button className="button-atomic-sell" title="Sell" />
-          </section>
-        )
-      } */}
+      <section>{tradeType}</section> 
     </main>
   );
 };

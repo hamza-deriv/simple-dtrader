@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import "../../styles/rangeticks.css"
 
 const RangeTicks:React.FC<{}> = () => {
 const [currentTickValue, setCurrentTickValue] = useState('5');
@@ -12,6 +13,7 @@ const tickValueHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
       <input
         type="range"
         id="ticks"
+        className="range-ticks"
         name="ticks"
         min="1"
         max="10"
@@ -22,7 +24,7 @@ const tickValueHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
       <label
         htmlFor="ticks"
         style={{
-          color: "white",
+          color: "black",
           textAlign: "center",
           marginBottom: "10px",
         }}

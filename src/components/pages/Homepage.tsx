@@ -21,7 +21,7 @@ const Homepage = () => {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [selectedSymbol, setSelectedSymbol] = useState(null);
-  const [serverResponse, setServerResponse] = useState([]);
+  const [serverResponse, setServerResponse] = useState<any>([]);
   const [tick, setTick] = useState(null);
   const [tickColor, setTickColor] = useState("#047553");
   const [buttonTitle, setButtonTitle] = useState<any>([]);
@@ -47,7 +47,7 @@ const Homepage = () => {
 
     if (data.msg_type === "tick") {
       setTick((prev) => {
-        if (prev > data.tick.bid) {
+        if (prev! > data.tick.bid) {
           setTickColor("#b3242d");
         } else {
           setTickColor("#047553");
@@ -81,8 +81,8 @@ const Homepage = () => {
 
     setAvailableSymbols(
       serverResponse
-        .filter((item) => item.market_display_name === e.target.value)
-        .map((item) => item.display_name)
+        .filter((item) => item?.['market_display_name'] === e.target.value)
+        .map((item) => item?.['display_name'])
     );
   };
 
@@ -109,7 +109,7 @@ const Homepage = () => {
       return;
     }
     setSelectedSymbol(
-      serverResponse?.find((item) => item.display_name === e.target.value).symbol
+      serverResponse?.find((item) => item?.['display_name'] === e.target.value)?.symbol
     );
   };
 
@@ -134,8 +134,8 @@ const Homepage = () => {
       setAvailableTradeTypes([]);
       const contracts_for_symbol_request = {
           contracts_for: selectedSymbol,
-          currency: userContext?.userData?.authorize?.currency
-            ? userContext?.userData?.authorize?.currency
+          currency: userContext?.userData?.['authorize']?.currency
+            ? userContext?.userData?.['authorize']?.currency
             : "USD",
           landing_company: "svg",
           product_type: "basic",
@@ -169,7 +169,7 @@ const Homepage = () => {
     };
   }, [activeResponse]);
   
-  let tickValue = null;
+  let tickValue ;
   let tradeType = 
   <>
     {tick && userContext.isAuthorized && (        

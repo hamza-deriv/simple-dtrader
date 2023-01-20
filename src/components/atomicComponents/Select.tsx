@@ -1,7 +1,7 @@
 import "../../styles/select.css";
 
 type TSelectProps = {
-  selectedOptionHandler:() => void, 
+  selectedOptionHandler:(e) => void, 
   defaultOption:string, 
   availableOptions:string[] 
 }

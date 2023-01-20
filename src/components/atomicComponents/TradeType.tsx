@@ -4,7 +4,7 @@ import Select from "./Select";
 import Button from "./Button";
 
 type TTradeTypesProps ={
-    selectedOptionHandler: () => void, 
+    selectedOptionHandler: (e) => void, 
     defaultOption?:string, 
     availableOptions:string[],
     buttonTitle:string[],

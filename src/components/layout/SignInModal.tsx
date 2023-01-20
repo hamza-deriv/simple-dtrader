@@ -34,6 +34,8 @@ const SignInModal = (props:any) => {
     ws_connection.send({
       authorize: userToken,
       req_id: 1,
+    }).catch((error) => {
+      console.log(error?.error?.message)
     });
   };
 

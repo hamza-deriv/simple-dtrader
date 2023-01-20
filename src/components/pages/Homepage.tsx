@@ -29,11 +29,10 @@ const Homepage = () => {
   const activeResponse = useCallback(async (res:any) => {
     setIsLoading(true);
 
-    const data = JSON.parse(res.data);
+    const data = await JSON.parse(res.data);
 
     if (data.error !== undefined) {
       setError(data.error?.message);
-      console.log("Error: ", data.error?.message);
       setErrorMessage(data.error?.message);
       setIsLoading(false);
       return;
@@ -45,8 +44,6 @@ const Homepage = () => {
         ...new Set(data.active_symbols.map((item) => item.market_display_name)),
       ]);
     }
-
-    console.log(data,data.msg_type)
 
     if (data.msg_type === "tick") {
       setTick((prev) => {
@@ -120,9 +117,12 @@ const Homepage = () => {
     setIsLoading(true);
     ws_connection.send({
       forget_all: "ticks",
+    }).catch((error) => {
+      console.log(error?.error?.message)
     });
 
     if (selectedSymbol === null) {
+      setIsLoading(false);
       return;
     }
 
@@ -141,7 +141,11 @@ const Homepage = () => {
           product_type: "basic",
         };
 
-        ws_connection.send(contracts_for_symbol_request);
+        ws_connection
+        .send(contracts_for_symbol_request)
+        .catch((error) => {
+          console.log(error?.error?.message)
+        });
     }
     setIsLoading(false);
   }, [selectedSymbol, userContext, error]);
@@ -151,7 +155,11 @@ const Homepage = () => {
 
     const getActiveSymbols = async () => {
       connection.addEventListener("message", activeResponse);
-      await ws_connection.send(active_symbols_request);
+      await ws_connection
+      .send(active_symbols_request)
+      .catch((error) => {
+        console.log(error?.error?.message)
+      });
     };
 
     getActiveSymbols();
@@ -160,7 +168,7 @@ const Homepage = () => {
       connection.removeEventListener("message", activeResponse, false);
     };
   }, [activeResponse]);
-console.log(userContext)
+  
   let tickValue = null;
   let tradeType = 
   <>
@@ -170,7 +178,6 @@ console.log(userContext)
             defaultOption={"Select Trade type"}
             availableOptions={availableTradeTypes}
             buttonTitle={buttonTitle}
-
         />
       )}
     </>

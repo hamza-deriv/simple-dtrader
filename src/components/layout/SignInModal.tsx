@@ -6,7 +6,7 @@ import "../../styles/signinmodal.css";
 
 const SignInModal = (props:any) => {
   const [authenticationError, setAuthenticationError] = useState<boolean>(false);
-  const [isAPIValid, setisAPIValid] = useState<boolean>(true);
+  const [isValidAPI, setIsValidAPI] = useState<boolean>(true);
   const APITokenRef = useRef<HTMLInputElement>(null);
 
   const closeModal = () => {
@@ -39,31 +39,31 @@ const SignInModal = (props:any) => {
     });
   };
 
-  const confirmHandler = (event:React.FormEvent) => {
-    event.preventDefault();
+  const submitHandler = (event:React.FormEvent) => {
+      event.preventDefault();
 
-    if (!APITokenRef.current) {
-      return;
-    }
-    const userAPIToken: string | null = APITokenRef.current.value;
+      if (!APITokenRef.current) {
+        return;
+      }
+      const userAPIToken: string | null = APITokenRef.current.value;
 
-    if (userAPIToken.trim() === "") {
-      setisAPIValid(false);
-      return;
-    }
+      if (userAPIToken.trim() === "") {
+        setIsValidAPI(false);
+        return;
+      }
 
-    getActiveSymbols(userAPIToken);
+      getActiveSymbols(userAPIToken);
   };
 
-  const apiChange = () => {
-    if (isAPIValid) {
-      return;
-    }
-    setisAPIValid(true);
+  const changeAPI = () => {
+      if (isValidAPI) {
+        return;
+      }
+      setIsValidAPI(true);
   };
 
   const formControl = `${'control'} ${
-    isAPIValid ? "" : 'invalid'
+    isValidAPI ? "" : 'invalid'
   }`;
   
   let formBody = (
@@ -75,7 +75,7 @@ const SignInModal = (props:any) => {
           id="apiToken"
           placeholder="API Token"
           ref={APITokenRef}
-          onChange={apiChange}
+          onChange={changeAPI}
         />
       </div>
       <div className='actions'>
@@ -107,7 +107,7 @@ const SignInModal = (props:any) => {
     <Modal>
       <p>Log in To Continue</p>
       <p>Get Authenticated Token from <a href="https://app.deriv.com/">here</a></p>
-      <form className='form' onSubmit={confirmHandler}>
+      <form className='form' onSubmit={submitHandler}>
         {formBody}
       </form>
     </Modal>

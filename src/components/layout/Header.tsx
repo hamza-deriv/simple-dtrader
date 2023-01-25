@@ -2,15 +2,15 @@ import { useEffect, useState, useContext } from "react";
 import { userEvents } from "../../utils/eventListener";
 import Logout from "./Logout";
 import SignInButton from "./SignInButton";
-import "../../styles/header.css";
 import UserContext from "../../stores/user-context";
+import "../../styles/header.css";
 
 const Header = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const userContext = useContext(UserContext)
   const [userBalance, setUserBalance] = useState(null);
   const [userCurrency, setUserCurrency] = useState(null);
-  const [userName, setUserName] = useState(null);
+  const [userName, setUserName] = useState("");
 
   const authorizationHandler = (data:any = null) => {
     if (!data) {
@@ -33,23 +33,31 @@ const Header = () => {
     };
   }, []);
 
+
   return (
     <>
       <header className='header'>
         <h1>Simple Trader</h1>
-        {!userContext.isAuthorized && <SignInButton />}
+        {
+          !userContext.isAuthorized && 
+            (
+              <SignInButton title="Sign In"/>
+            )
+        }
         {userContext.isAuthorized && (
-          <>
-            <p>Welcome, {userName ? userName : 'John Doe'} !</p>
-            <p>
-              {userBalance} {userCurrency}
-            </p>
-            <Logout />
-          </>
-        )}
+            <>
+              <p>Welcome, {userName ? userName : 'John Doe'} !</p>
+              <p>
+                {userBalance} {userCurrency}
+              </p>
+              <Logout title="Log Out"/>
+            </>
+          )
+        }
       </header>
-      <div className="separator">
-      </div>
+
+      <div className="separator" />
+
     </>
   );
 };

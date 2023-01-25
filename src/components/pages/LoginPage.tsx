@@ -1,23 +1,7 @@
+// Not used (Template)
+
 import "../styles/login.css";
 import { useState } from "react";
-
-interface RouterProps {
-    history: string;
-  }
-
-type LoginToken = {
-    token: string,
-    is_logged_in: boolean
-
-}
-  
-  type State = {
-    username: string,
-    password: string,
-    loading: boolean,
-    message: string
-  };
-  
   
 
 const LoginPage = () => {
@@ -74,8 +58,6 @@ const LoginPage = () => {
 
                 <button 
                 type="submit"
-                // disabled={true}
-                // disabled
                 >Login</button>
             </form>
             </div>
@@ -83,5 +65,4 @@ const LoginPage = () => {
     )
 }
 
-// export default observer(LoginPage);
 export default LoginPage;

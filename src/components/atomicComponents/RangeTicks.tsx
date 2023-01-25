@@ -1,8 +1,12 @@
 import React, { useState } from "react"
 import "../../styles/rangeticks.css"
 
-const RangeTicks:React.FC<{}> = () => {
-const [currentTickValue, setCurrentTickValue] = useState('5');
+type TRangeTicks = {
+  ticks:string
+}
+
+const RangeTicks:React.FC<TRangeTicks> = (props:TRangeTicks) => {
+const [currentTickValue, setCurrentTickValue] = useState<string>(props.ticks);
 
 const tickValueHandler = (e:React.ChangeEvent<HTMLInputElement>) => {
   setCurrentTickValue(e.target.value);

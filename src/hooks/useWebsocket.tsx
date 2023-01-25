@@ -1,6 +1,7 @@
+// Unused file
 import { useEffect, useRef } from "react";
 // @ts-ignore
-import { active_symbols_request  } from "../utils/common.js"; 
+import { active_symbols_request  } from "../utils/ticks.js"; 
 
 const useWebsocket = () => {
   const websocket = useRef<WebSocket>();

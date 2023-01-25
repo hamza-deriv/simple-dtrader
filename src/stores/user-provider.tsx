@@ -6,6 +6,8 @@ const defaultUserState = {
   isAuthorized: false,
 };
 
+
+// Dispatching Actions
 const userReducer = (state, action) => {
   if (action.type === "ADD") {
     return {
@@ -23,6 +25,8 @@ const userReducer = (state, action) => {
   return defaultUserState;
 };
 
+
+// Setting the Provider Function
 const UserProvider = (props:any) => {
   const [userState, dispatchUser] = useReducer(
     userReducer,

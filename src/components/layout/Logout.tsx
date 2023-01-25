@@ -2,7 +2,11 @@ import "../../styles/signin.css";
 import { ws_connection } from "../../utils/common.js";
 import { userEvents } from "../../utils/eventListener";
 
-const Logout = (props:any) => {
+type TLogoutProps = {
+  title:string
+}
+
+const Logout = (props:TLogoutProps) => {
   const logOut = () => {
     ws_connection.send({
       logout: 1,
@@ -12,7 +16,7 @@ const Logout = (props:any) => {
 
   return (
     <button className='button' onClick={logOut}>
-      <span>Log out</span>
+      <span>{props.title}</span>
     </button>
   );
 };

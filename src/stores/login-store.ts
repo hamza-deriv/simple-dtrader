@@ -1,3 +1,4 @@
+// template file
 import { action, reaction, makeObservable } from 'mobx';
 
 export default class LoginnStore {
@@ -5,8 +6,6 @@ export default class LoginnStore {
         makeObservable(this, {
            
         });
-
-
 
     }
 }

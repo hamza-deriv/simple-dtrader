@@ -20,7 +20,7 @@ const TradeType: React.FC<TTradeTypesProps> = (props:TTradeTypesProps) => {
               defaultOption={"Select Trade type"}
               availableOptions={availableOptions}
             />
-            {/* <RangeTicks /> */}
+            {/* <RangeTicks ticks="5"/> */}
             <section className="section-button">
               <Button className="button-atomic-buy" title={buttonTitle[0] ? buttonTitle[0] : "Up"} />
               <Button className="button-atomic-sell" title={buttonTitle[1] ? buttonTitle[1] : "Down"} />

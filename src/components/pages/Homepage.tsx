@@ -1,10 +1,9 @@
 import { useEffect, useState, useCallback, useContext } from "react";
 import {
   connection,
-  ws_connection,
-  active_symbols_request,
-  ticks_request,
+  ws_connection
 } from "../../utils/common.js";
+import { ticks_request, active_symbols_request } from "../../utils/ticks.js";
 import UserContext from "../../stores/user-context";
 import Select from "../atomicComponents/Select";
 import Loader from "../atomicComponents/Loader";

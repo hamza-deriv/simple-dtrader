@@ -1,14 +1,18 @@
 import "../../styles/signin.css";
 import { userEvents } from "../../utils/eventListener";
 
-const SignInButton = (props:any) => {
+type TSignInProps = {
+  title:string
+}
+
+const SignInButton = (props:TSignInProps) => {
   const openCard = () => {
     userEvents.emit("OpenSignInModal");
   };
 
   return (
     <button className='button' onClick={openCard}>
-      <span>Sign in</span>
+      <span>{props.title}</span>
     </button>
   );
 };
